@@ -3,7 +3,7 @@
   "main": "./lib/chatter",
   "version": "0.0.0",
   "description": "A short description of your package",
-  "activationEvents": ["chatter:convert"],
+  "activationEvents": ["chatter:sidebar"],
   "repository": "https://github.com/atom/chatter",
   "license": "MIT",
   "engines": {
