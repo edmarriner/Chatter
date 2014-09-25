@@ -40,6 +40,11 @@ class ChatterView extends ScrollView
 		if @hasParent()
 			@detach()
 		else
+			###
+				TODO: 	Maybe this should be moved into a URI based approad?
+						This will allow the user to pull the tab out and will also allow
+						us to refocus on the tab when inactive.
+			###
 			pane = atom.workspaceView.getActivePaneView()
 			pane.splitRight(this)
 			#rightPane = atom.workspaceView.getActiveView()
