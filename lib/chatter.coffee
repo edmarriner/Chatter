@@ -4,10 +4,11 @@ module.exports =
     chatterView: null
 
     activate: (state) ->
-      @chatterView = new ChatterView(state.chatterViewState)
+        @chatterView = new ChatterView(state.chatterViewState)
+        atom.workspaceView.command "chatter:sidebar", => @chatterView.toggle()
 
     deactivate: ->
-      @chatterView.destroy()
+        @chatterView.destroy()
 
     serialize: ->
-      chatterViewState: @chatterView.serialize()
+        chatterViewState: @chatterView.serialize()

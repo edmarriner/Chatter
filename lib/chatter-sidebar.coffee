@@ -3,15 +3,16 @@
 module.exports =
 class ChatterView extends ScrollView
 	@content: ->
-		@div class: "chatter ", tabindex: -1, =>
-			@div class: "panel bordered sidebar", =>
+		@div class: "chatter", tabindex: -1, =>
+			@div class: "panel
+				 sidebar", =>
 				@div class: "panel-heading", =>
 					@div class: 'block', =>
 						@button outlet: "closeButton", class: 'btn btn-error inline-block-tight pull-right', "X"
 				@div class: "panel-body padded", 'Chat stuff here...'
 
 	initialize: (serializeState) ->
-		atom.workspaceView.command "chatter:sidebar", => @toggle()
+		#atom.workspaceView.command "chatter:sidebar", => @toggle()
 
 		# Setup all the event listeners
 		@setUpEvents()
@@ -40,6 +41,8 @@ class ChatterView extends ScrollView
 			@detach()
 		else
 			pane = atom.workspaceView.getActivePaneView()
-			pane.splitRight()
+			pane.splitRight(this)
+			#rightPane = atom.workspaceView.getActiveView()
+			#rightPane.addItem(this)
 			#atom.workspaceView.appendToBottom(this)
 			#.append(this)
