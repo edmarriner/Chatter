@@ -39,4 +39,7 @@ class ChatterView extends ScrollView
 		if @hasParent()
 			@detach()
 		else
-			atom.workspaceView.append(this)
+			pane = atom.workspaceView.getActivePaneView()
+			pane.splitRight()
+			#atom.workspaceView.appendToBottom(this)
+			#.append(this)
