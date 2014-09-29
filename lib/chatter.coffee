@@ -1,23 +1,24 @@
-ConfigView      = require './components/config'
-MessageView     = require './components/message'
-PeopleView      = require './components/people'
-RoomsView       = require './components/rooms'
-MainView        = require './components/main'
+{ScrollView, EditorView} = require 'atom'
 
 module.exports =
-    main: null
+class Chatter extends ScrollView
 
-    # Constructor
-    activate: (state) ->
-        atom.workspaceView.command "chatter:open", => @open()
+    pane = null
 
-    # Deconstructor
-    deactivate: ->
-        @detach()
+    @open: ->
+        @pane = atom.workspaceView.getActivePaneView().splitRight(this).getActiveView()
+        @pane.css({ "width" : "300" })
+        alert("Made-it")
 
-    serialize: ->
+    @close: ->
 
-    open: ->
-        if(!@main) {
-            @main = new MainView()
-        }
+
+
+    @content: ->
+        @div class: "chatter", tabindex: -1, =>
+            @div class: "panel
+                 sidebar", =>
+                @div class: "panel-heading", =>
+                    @div class: 'block', =>
+                        @button outlet: "closeButton", class: 'btn btn-error inline-block-tight pull-right', "X"
+                @div class: "panel-body padded", 'Chat stuff here...'
