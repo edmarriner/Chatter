@@ -1,24 +1,23 @@
-ChatterView = require './chatter-sidebar'
+ConfigView      = require './components/config'
+MessageView     = require './components/message'
+PeopleView      = require './components/people'
+RoomsView       = require './components/rooms'
+MainView        = require './components/main'
 
 module.exports =
-    chatterView: null
+    main: null
 
+    # Constructor
     activate: (state) ->
-        @chatterView = new ChatterView(state.chatterViewState)
-        ###
-            TODO:   Need to pull the wrapper logic out from the other parts of the application
-                    Required views:
-                        - Wrapper/Parent
-                        - Channels
-                        - Chat view
-                        - Chat response box
-                        - Popup notification?
-                        - Config view
-        ###
-        atom.workspaceView.command "chatter:sidebar", => @chatterView.toggle()
+        atom.workspaceView.command "chatter:open", => @open()
 
+    # Deconstructor
     deactivate: ->
-        @chatterView.destroy()
+        @detach()
 
     serialize: ->
-        chatterViewState: @chatterView.serialize()
+
+    open: ->
+        if(!@main) {
+            @main = new MainView()
+        }
