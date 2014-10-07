@@ -12,16 +12,28 @@ class Chatter extends ScrollView
 
     initialize: ->
 
+        atom.workspace.registerOpener (uriToOpen) ->
+            try
+                {protocol, host, pathname} = url.parse(uriToOpen)
+            catch error
+                return
+
+            return unless protocol is 'chatter:'
+
+            return new MessageView()
+
+
     open: ->
-        @pane = atom.workspaceView.getActivePaneView().splitRight(this).getActiveView()
+
+        atom.workspace.open('chatter:://message-view', searchAllPanes: true).done (messageView) ->
+          if messageView instanceof MessageView
+            atom.workspaceView.getActivePaneView()addItem(messageView)
+            atom.workspace.activatePreviousPane()
+
+        #@pane = atom.workspaceView.getActivePaneView().splitRight(this).getActiveView()
         #atom.workspaceView.getActivePaneView().splitRight(this)
         #@pane = atom.workspaceView.getActivePaneView()
         #$('.pane.active').css({ "width" : "290", "flex" : "none"})
 
     @content: ->
         @div class: "chatter", tabindex: -1, =>
-            @div class: "panel sidebar", =>
-                @div class: "panel-heading", =>
-                    @div class: 'block', =>
-                        @button outlet: "closeButton", class: 'btn btn-error inline-block-tight pull-right', "X"
-                @div class: "panel-body padded", 'Chat stuff here...'

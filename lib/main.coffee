@@ -8,7 +8,6 @@ module.exports =
 		@chatter = new Chatter()
 
 		atom.workspaceView.command "chatter:open", =>
-			console.log(@chatter)
 			@chatter.open()
 
 		atom.workspaceView.command "chatter:close", =>
