@@ -6,9 +6,13 @@
 
 .chatter {
 
-	width: 100%;
-	height: 100px;
-	background: red;
+	position: relative;
+	overflow: auto;
+	width: 300 * 0.1em;
+	padding: 0px;
+	border-left: 1px solid darken(@tree-view-background-color, 50%);
+	background-color: darken(@tree-view-background-color, 5%);
+	color: darken(@tree-view-background-color, 90%);
 
 	/*
 		Import the component less files into the
@@ -20,4 +24,8 @@
 	@import "components/people";
 	@import "components/rooms";
 
+}
+
+.hidden {
+	display:none;
 }

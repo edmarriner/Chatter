@@ -22,13 +22,28 @@ class Chatter extends ScrollView
 
             return new MessageView()
 
+    close: ->
+        this.detach() if this.hasParent()
+
+    hide: ->
+        this.toggleClass 'hidden'
+
+    quit: ->
+        this.detach()
 
     open: ->
 
-        atom.workspace.open('chatter:://message-view', searchAllPanes: true).done (messageView) ->
-          if messageView instanceof MessageView
-            atom.workspaceView.getActivePaneView()addItem(messageView)
-            atom.workspace.activatePreviousPane()
+        if this.hasParent()
+            this.toggleClass 'hidden'
+        else
+            alert "A new chat instance was started."
+            atom.workspaceView.appendToRight(this)
+            this.focus()
+
+        #atom.workspace.open('chatter:://message-view', searchAllPanes: true).done (messageView) ->
+        #  if messageView instanceof MessageView
+    #        atom.workspaceView.getActivePaneView()addItem(messageView)
+#            atom.workspace.activatePreviousPane()
 
         #@pane = atom.workspaceView.getActivePaneView().splitRight(this).getActiveView()
         #atom.workspaceView.getActivePaneView().splitRight(this)

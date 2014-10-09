@@ -10,7 +10,10 @@ module.exports =
 		atom.workspaceView.command "chatter:open", =>
 			@chatter.open()
 
-		atom.workspaceView.command "chatter:close", =>
+		atom.workspaceView.command "chatter:hide", =>
+			@chatter.hide()
+
+		atom.workspaceView.command "chatter:quit", =>
 			@chatter.close()
 
 	# Deconstructor

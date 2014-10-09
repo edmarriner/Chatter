@@ -5,7 +5,8 @@
     "description": "A short description of your package",
     "activationEvents": [
         "chatter:open",
-        "chatter:close"
+        "chatter:quit",
+        "chatter:hide"
     ],
     "repository": "https://github.com/atom/chatter",
     "license": "MIT",
